@@ -14,8 +14,8 @@ const BlogList = ({ posts }: Props) => {
       <hr className="border-primary mb-10" />
 
       <div className="grid grid-cols-1 md:grid-cols-2 px-10 gap-10 gap-y-16 pb-24">
-        {posts.map((post) => (
-          <ClientSideRoute route={`/post/${post.slug.current}`}>
+        {posts.map((post, index) => (
+          <ClientSideRoute key={index} route={`/post/${post.slug.current}`}>
             <div key={post._id} className="flex flex-col group cursor-pointer">
               <div className="relative w-full h-80 drop-shadow-xl group-hover:scale-105 transition-transform duration-200 ease-out">
                 <Image
@@ -38,8 +38,11 @@ const BlogList = ({ posts }: Props) => {
                   </div>
 
                   <div className="flex flex-col md:flex-row gap-y-2 md:gap-x-2 items-center">
-                    {post?.categories?.map((category) => (
-                      <div className="bg-primary text-center text-black px-3 py-1 rounded-full text-sm font-semibold">
+                    {post?.categories?.map((category, index) => (
+                      <div
+                        key={`post_${index}`}
+                        className="bg-primary text-center text-black px-3 py-1 rounded-full text-sm font-semibold"
+                      >
                         <p>{category.title}</p>
                       </div>
                     ))}
